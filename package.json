@@ -29,6 +29,8 @@
   "scripts": {
     "start:staging": "dotenv -e .env.staging react-scripts start",
     "build:staging": "dotenv -e .env.staging react-scripts build",
+    "start:local": "dotenv -e .env.local react-scripts start",
+    "build:local": "dotenv -e .env.local react-scripts build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
