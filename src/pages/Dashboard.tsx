@@ -1,78 +1,133 @@
-import React, { useState } from 'react';
-import { Box, Drawer, List, ListItem, ListItemText } from '@mui/material';
-import { Home, Work, People, LocalOffer, DirectionsCar } from '@mui/icons-material';
-import { useNavigate, Outlet } from 'react-router-dom';
-
-const drawerWidth = 240;
+import React from 'react';
+import { Box, Typography, Button } from '@mui/material';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
-  const [activeItem, setActiveItem] = useState<string>('Home');
   const navigate = useNavigate();
 
-  const handleListItemClick = (item: string, path: string) => {
-    setActiveItem(item);
-    navigate(path);
+  const handlePlayClick = () => {
+    navigate('/play');
+  };
+
+  const handleQuitClick = () => {
+    navigate('/');
   };
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh' }}>
-      <Drawer
-  sx={{
-    width: drawerWidth,
-    flexShrink: 0,
-    '& .MuiDrawer-paper': {
-      width: drawerWidth,
-      boxSizing: 'border-box',
-      backgroundColor: '#2C3E50',  // Dark blue-gray color for the sidebar
-      color: '#ECF0F1',  // Light text color for contrast
-    },
-  }}
-  variant="permanent"
-  anchor="left"
->
-  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
-    <img src='./images/Main_logo.png' alt="Company Logo" onClick={() => handleListItemClick('Home', '/dashboard')} style={{ height: '120px' }} />
-  </Box>
-  <List>
-    {[
-      { text: 'Home', icon: <Home />, path: '/dashboard/home' },
-      { text: 'Job', icon: <Work />, path: '/dashboard/job' },
-      { text: 'Employee', icon: <People />, path: '/dashboard/employee' },
-      { text: 'Brand', icon: <LocalOffer />, path: '/dashboard/brand' },
-      { text: 'Vehicle Part', icon: <DirectionsCar />, path: '/dashboard/vehicle-part' },
-    ].map(({ text, icon, path }) => (
-      <ListItem
-        button
-        key={text}
-        onClick={() => handleListItemClick(text, path)}
-        sx={{
-          color: '#ECF0F1',  // Light text color for list items
-          '&:hover': {
-            backgroundColor: '#34495E',  // Slightly lighter color for hover effect
-          },
-          backgroundColor: activeItem === text ? '#34495E' : 'inherit',
-        }}
-      >
-        {icon}
-        <ListItemText primary={text} sx={{ color: '#ECF0F1' }} />
-      </ListItem>
-    ))}
-  </List>
-</Drawer>
-
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100vh',
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundPosition: 'center',
+        backgroundSize: '100% 100%',
+        backgroundImage: `url(./images/background.png)`,
+        backgroundColor: '#E3F9A6',
+        // '::before': {
+        //   content: '""',
+        //   position: 'absolute',
+        //   top: 0,
+        //   left: 0,
+        //   width: '100%',
+        //   height: '100%',
+        //   backgroundColor: 'rgba(0, 0, 0, 0.1)', // Adjust the opacity for darkness
+        //   //zIndex: 1,
+        // },
+        //zIndex: 2,
+        outline: '4px solid #C69C6D', // Light brown outline
+        borderRadius: '25px',
+      }}
+    >
       <Box
-        component="main"
         sx={{
-          flexGrow: 1,
-          bgcolor: 'background.default',
-          p: 3,
-          height: 'full-height',
-          background: 'linear-gradient(45deg, #ffcc00, #ff9900, #ff6600, #ff3300)',
-          backgroundSize: '400% 400%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          backgroundColor: 'rgba(255, 242, 117, 0.5)', // Banana yellow theme
+          padding: '30px',
+          borderRadius: '20px',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
+          width: '900px',
+          height: '600px',
         }}
       >
-        <Outlet />
+        <Box
+          sx={{
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 242, 117, 0.5)', // Banana yellow theme
+            padding: '30px',
+            borderRadius: '20px',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.9)', // Soft yellow glow  0px 0px 20px rgba(255, 195, 0, 0.8)
+            width: '600px',
+            //outline: '5px solid #8D6E63', // Light brown/dark yellow outline for separation
+          }}
+        >
+          <Typography
+            variant="h2"
+            sx={{ color: '#6D4C41', fontWeight: 'bold', marginBottom: '20px', fontFamily: 'Comic Sans MS' }}
+          >
+            🍌 Main Menu 🍌
+          </Typography>
+          <Button
+            sx={{
+              display: 'block',
+              width: '100%',
+              backgroundColor: '#FFD600', // Banana yellow for buttons
+              color: '#6D4C41', // Brown text
+              marginBottom: '15px',
+              padding: '12px 0',
+              borderRadius: '10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFEB3B' }, // Lighter yellow on hover
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Add some button shadow
+            }}
+            onClick={handlePlayClick} // Navigate to LevelSelection
+          >
+            Play 🍌
+          </Button>
+          <Button
+            sx={{
+              display: 'block',
+              width: '100%',
+              backgroundColor: '#FFD600', // Same banana yellow
+              color: '#6D4C41', // Brown text
+              marginBottom: '15px',
+              padding: '12px 0',
+              borderRadius: '10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFEB3B' },
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+            }}
+          >
+            Scoreboard  🍍
+          </Button>
+          <Button
+            sx={{
+              display: 'block',
+              width: '100%',
+              backgroundColor: '#FFD600',
+              color: '#6D4C41',
+              padding: '12px 0',
+              borderRadius: '10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFEB3B' },
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+            }}
+            onClick={handleQuitClick}
+          >
+            Quit Game 🌴
+          </Button>
+        </Box>
       </Box>
+      <Outlet />
     </Box>
   );
 };

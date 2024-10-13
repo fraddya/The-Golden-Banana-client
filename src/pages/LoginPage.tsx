@@ -92,7 +92,7 @@ const LoginPage: React.FC = () => {
             border: '1px solid rgba(255, 255, 255, 0.3)',
           }}
         >
-          <Typography variant="h3" gutterBottom align="center" sx={{ marginBottom: '10px', color: '#000', fontWeight: 'bold' }}>
+          <Typography variant="h3" gutterBottom align="center" sx={{ marginBottom: '10px', color: '#6D4C41', fontWeight: 'bold' }}>
             Login
           </Typography>
           <Box display="flex" justifyContent="center" mb={3}>
@@ -148,7 +148,7 @@ const LoginPage: React.FC = () => {
               color="primary"
               fullWidth
               disabled={loading}
-              sx={{ padding: '10px 0', backgroundColor: '#000' }}
+              sx={{ padding: '10px 0', backgroundColor: '#6D4C41' }}
             >
               {loading ? 'Logging in...' : 'Login'}
             </Button>
