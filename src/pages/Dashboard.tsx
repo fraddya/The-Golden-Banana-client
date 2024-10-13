@@ -1,8 +1,18 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handlePlayClick = () => {
+    navigate('/play');
+  };
+
+  const handleQuitClick = () => {
+    navigate('/');
+  };
+
   return (
     <Box
       sx={{
@@ -15,17 +25,17 @@ const Dashboard: React.FC = () => {
         backgroundSize: '100% 100%',
         backgroundImage: `url(./images/background.png)`,
         backgroundColor: '#E3F9A6',
-        '::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)', // Adjust the opacity for darkness
-          zIndex: 1,
-        },
-        zIndex: 2,
+        // '::before': {
+        //   content: '""',
+        //   position: 'absolute',
+        //   top: 0,
+        //   left: 0,
+        //   width: '100%',
+        //   height: '100%',
+        //   backgroundColor: 'rgba(0, 0, 0, 0.1)', // Adjust the opacity for darkness
+        //   //zIndex: 1,
+        // },
+        //zIndex: 2,
         outline: '4px solid #C69C6D', // Light brown outline
         borderRadius: '25px',
       }}
@@ -77,6 +87,7 @@ const Dashboard: React.FC = () => {
               '&:hover': { backgroundColor: '#FFEB3B' }, // Lighter yellow on hover
               boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Add some button shadow
             }}
+            onClick={handlePlayClick} // Navigate to LevelSelection
           >
             Play 🍌
           </Button>
@@ -110,6 +121,7 @@ const Dashboard: React.FC = () => {
               '&:hover': { backgroundColor: '#FFEB3B' },
               boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
             }}
+            onClick={handleQuitClick}
           >
             Quit Game 🌴
           </Button>
