@@ -1,25 +1,121 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-
 const Dashboard: React.FC = () => {
-
   return (
-    <Box sx={{ display: 'flex', height: '100vh' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100vh',
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundPosition: 'center',
+        backgroundSize: '100% 100%',
+        backgroundImage: `url(./images/background.png)`,
+        backgroundColor: '#E3F9A6',
+        '::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.1)', // Adjust the opacity for darkness
+          zIndex: 1,
+        },
+        zIndex: 2,
+        outline: '4px solid #C69C6D', // Light brown outline
+        borderRadius: '25px',
+      }}
+    >
       <Box
-        component="main"
         sx={{
-          flexGrow: 1,
-          bgcolor: 'background.default',
-          p: 3,
-          height: 'full-height',
-          background: 'linear-gradient(45deg, #ffcc00, #ff9900, #ff6600, #ff3300)',
-          backgroundSize: '400% 400%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          backgroundColor: 'rgba(255, 242, 117, 0.5)', // Banana yellow theme
+          padding: '30px',
+          borderRadius: '20px',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
+          width: '900px',
+          height: '600px',
         }}
       >
-        <Outlet />
+        <Box
+          sx={{
+            textAlign: 'center',
+            backgroundColor: 'rgba(255, 242, 117, 0.5)', // Banana yellow theme
+            padding: '30px',
+            borderRadius: '20px',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.9)', // Soft yellow glow  0px 0px 20px rgba(255, 195, 0, 0.8)
+            width: '600px',
+            //outline: '5px solid #8D6E63', // Light brown/dark yellow outline for separation
+          }}
+        >
+          <Typography
+            variant="h2"
+            sx={{ color: '#6D4C41', fontWeight: 'bold', marginBottom: '20px', fontFamily: 'Comic Sans MS' }}
+          >
+            🍌 Main Menu 🍌
+          </Typography>
+          <Button
+            sx={{
+              display: 'block',
+              width: '100%',
+              backgroundColor: '#FFD600', // Banana yellow for buttons
+              color: '#6D4C41', // Brown text
+              marginBottom: '15px',
+              padding: '12px 0',
+              borderRadius: '10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFEB3B' }, // Lighter yellow on hover
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Add some button shadow
+            }}
+          >
+            Play 🍌
+          </Button>
+          <Button
+            sx={{
+              display: 'block',
+              width: '100%',
+              backgroundColor: '#FFD600', // Same banana yellow
+              color: '#6D4C41', // Brown text
+              marginBottom: '15px',
+              padding: '12px 0',
+              borderRadius: '10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFEB3B' },
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+            }}
+          >
+            Scoreboard  🍍
+          </Button>
+          <Button
+            sx={{
+              display: 'block',
+              width: '100%',
+              backgroundColor: '#FFD600',
+              color: '#6D4C41',
+              padding: '12px 0',
+              borderRadius: '10px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: '#FFEB3B' },
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+            }}
+          >
+            Quit Game 🌴
+          </Button>
+        </Box>
       </Box>
+      <Outlet />
     </Box>
   );
 };
