@@ -4,6 +4,7 @@ export interface Level {
   id: number;
   name: string;
   description: string;
+  difficulty: string;
 }
 
 // Fetch all levels
