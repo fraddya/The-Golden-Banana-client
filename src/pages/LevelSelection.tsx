@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Grid, CircularProgress } from '@mui/material';
 import { fetchLevelSuggestions, Level } from '../services/levelService'; // Assuming your service layer is in api.ts
+import { useNavigate } from 'react-router-dom';
 
 const LevelSelection: React.FC = () => {
   const [levels, setLevels] = useState<Level[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+
+  const handleLevelClick = (level: Level) => {
+    navigate(`/level/${level.id}`); // Redirect to the new level page
+  };
 
   useEffect(() => {
     const fetchAllLevels = async () => {
@@ -33,6 +39,7 @@ const LevelSelection: React.FC = () => {
           }}
         >
           <Button
+          onClick={() => handleLevelClick(level)}
             sx={{
               backgroundColor: '#FFD600', // Banana yellow for buttons
               color: '#6D4C41', // Brown text
