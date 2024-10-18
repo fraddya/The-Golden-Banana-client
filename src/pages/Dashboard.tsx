@@ -13,6 +13,10 @@ const Dashboard: React.FC = () => {
     navigate('/');
   };
 
+  const handleScoreboardClick = () => {
+    navigate('/leaderboard');
+  };
+
   return (
     <Box
       sx={{
@@ -105,6 +109,7 @@ const Dashboard: React.FC = () => {
               '&:hover': { backgroundColor: '#FFEB3B' },
               boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
             }}
+            onClick={handleScoreboardClick}
           >
             Scoreboard  🍍
           </Button>
