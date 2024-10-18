@@ -171,7 +171,7 @@ const LevelPage: React.FC = () => {
         background: timeLeft <= 5
           ? `radial-gradient(circle at center, rgba(255, 255, 255, 0) 60%, rgba(255, 0, 0, 0.6) 100%)`
           : 'none',
-        animation: heartbeat ? 'panicEffect 1.0s infinite' : 'none',
+        animation: heartbeat ? 'panicEffect 0.5s infinite' : 'none',
         '@keyframes panicEffect': {
           '0%': { opacity: 0.8 },
           '50%': { opacity: 1 },

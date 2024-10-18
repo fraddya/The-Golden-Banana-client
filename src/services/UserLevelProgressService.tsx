@@ -113,3 +113,16 @@ export const deleteUserLevelProgress = async (id: number): Promise<void> => {
     throw new Error(`Failed to delete user level progress with ID ${id}`);
   }
 };
+
+export const getLeaderBoards = async (): Promise<UserLevelProgressSearchResponse> => {
+  const response = await fetch(`${apiUrl}/userLevelProgress/leaderBoards`, {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to get leader bord details');
+  }
+
+  const data = await response.json();
+  return data;
+};
