@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box, Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link  } from 'react-router-dom';
 import { loginUser } from '../services/userService';  // Import the loginUser function from your service
 
 const LoginPage: React.FC = () => {
@@ -18,13 +18,15 @@ const LoginPage: React.FC = () => {
     try {
       const user = await loginUser(email, password);
       // console.log('Logged in user:', user);
-      if (user.role === 'USER') {
+      if (user.firstTimeLogin) {
+        navigate('/password-reset'); // Redirect to password reset page
+      } else if (user.role === 'USER') {
         localStorage.setItem('userRole', user.role);
         localStorage.setItem('userName', user.firstName);
         navigate('/dashboard');
+      } else {
+        setError("User Not Authorized");
       }
-      // navigate('/dashboard');
-      setError("User Not Authorized");
     } catch (err: Error | any) {
       setError(err.message);
     } finally {
@@ -152,6 +154,26 @@ const LoginPage: React.FC = () => {
             >
               {loading ? 'Logging in...' : 'Login'}
             </Button>
+            <Typography
+              variant="body2"
+              align="center"
+              sx={{ marginTop: '20px', color: '#000' }}
+            >
+              Don't have an account?{' '}
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: 'none',
+                  color: '#000',
+                  fontWeight: 'bold',
+                  position: 'relative',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+                onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+              >
+                Create one
+              </Link>
+            </Typography>
           </Box>
         </Paper>
       </Container>
