@@ -1,4 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
+const getToken = () => localStorage.getItem('token');
 
 export interface UserLevelProgressCreateRequest {
   marks: number;
@@ -49,6 +50,7 @@ export const createUserLevelProgress = async (progress: UserLevelProgressCreateR
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(progress),
   });
@@ -64,6 +66,9 @@ export const createUserLevelProgress = async (progress: UserLevelProgressCreateR
 export const searchUserLevelProgress = async (): Promise<UserLevelProgressSearchResponse> => {
   const response = await fetch(`${apiUrl}/userLevelProgress`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -77,6 +82,9 @@ export const searchUserLevelProgress = async (): Promise<UserLevelProgressSearch
 export const fetchUserLevelProgressById = async (id: number): Promise<UserLevelProgressResponse> => {
   const response = await fetch(`${apiUrl}/userLevelProgress/${id}`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -92,6 +100,7 @@ export const updateUserLevelProgress = async (id: number, updatedProgress: Parti
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(updatedProgress),
   });
@@ -107,6 +116,9 @@ export const updateUserLevelProgress = async (id: number, updatedProgress: Parti
 export const deleteUserLevelProgress = async (id: number): Promise<void> => {
   const response = await fetch(`${apiUrl}/userLevelProgress/${id}`, {
     method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -117,6 +129,9 @@ export const deleteUserLevelProgress = async (id: number): Promise<void> => {
 export const getLeaderBoards = async (): Promise<UserLevelProgressSearchResponse> => {
   const response = await fetch(`${apiUrl}/userLevelProgress/leaderBoards`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {

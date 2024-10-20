@@ -1,4 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
+const getToken = () => localStorage.getItem('token');
 
 export interface Vehicle {
   vehicleNo: string;
@@ -34,6 +35,9 @@ export interface User {
 export const fetchEmployees = async (): Promise<User[]> => {
   const response = await fetch(`${apiUrl}/users?role=EMPLOYEE`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -47,6 +51,9 @@ export const fetchEmployees = async (): Promise<User[]> => {
 export const fetchUsers = async (): Promise<User[]> => {
   const response = await fetch(`${apiUrl}/users?role=USER`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -61,6 +68,9 @@ export const fetchUsers = async (): Promise<User[]> => {
 export const fetchUserById = async (id: number): Promise<User> => {
   const response = await fetch(`${apiUrl}/users/${id}`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -77,6 +87,7 @@ export const createUser = async (newUser: Partial<User>): Promise<User> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(newUser),
   });
@@ -95,6 +106,7 @@ export const updateUser = async (id: number, updatedUser: Partial<User>): Promis
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(updatedUser),
   });
@@ -113,6 +125,7 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify({ email, passWord }),
   });
@@ -125,5 +138,11 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
   }
 
   const data = await response.json();
+  
+  // Store token in local storage
+  localStorage.setItem('token', data.content.token);
+  localStorage.setItem('userId', data.content.id);
+
   return data.content;
 };
+

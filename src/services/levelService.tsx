@@ -1,4 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
+const getToken = () => localStorage.getItem('token');
 
 export interface Level {
   id: number;
@@ -11,6 +12,9 @@ export interface Level {
 export const fetchLevels = async (): Promise<Level[]> => {
   const response = await fetch(`${apiUrl}/levels`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -25,6 +29,9 @@ export const fetchLevels = async (): Promise<Level[]> => {
 export const fetchLevelById = async (id: number): Promise<Level> => {
   const response = await fetch(`${apiUrl}/levels/${id}`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -41,6 +48,7 @@ export const createLevel = async (newLevel: Partial<Level>): Promise<Level> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(newLevel),
   });
@@ -59,6 +67,7 @@ export const updateLevel = async (id: number, updatedLevel: Partial<Level>): Pro
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(updatedLevel),
   });
@@ -75,6 +84,9 @@ export const updateLevel = async (id: number, updatedLevel: Partial<Level>): Pro
 export const deleteLevel = async (id: number): Promise<void> => {
   const response = await fetch(`${apiUrl}/levels/${id}`, {
     method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -86,6 +98,9 @@ export const deleteLevel = async (id: number): Promise<void> => {
 export const fetchLevelSuggestions = async (): Promise<Level[]> => {
   const response = await fetch(`${apiUrl}/levels/suggestions`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {

@@ -1,4 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL; 
+const getToken = () => localStorage.getItem('token');
 
 export interface RequestQuestion {
   question: string; 
@@ -8,6 +9,9 @@ export interface RequestQuestion {
 export const fetchRequestQuestion = async (): Promise<RequestQuestion> => {
   const response = await fetch(`${apiUrl}/requestQuestions`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
@@ -19,12 +23,12 @@ export const fetchRequestQuestion = async (): Promise<RequestQuestion> => {
   return data.content;
 };
 
-const getRequestQuestion = async () => {
-  try {
-    const requestQuestion = await fetchRequestQuestion();
-    console.log('Question:', requestQuestion.question);
-    console.log('Solution:', requestQuestion.solution);
-  } catch (error) {
-    console.error(error);
-  }
-};
+// const getRequestQuestion = async () => {
+//   try {
+//     const requestQuestion = await fetchRequestQuestion();
+//     console.log('Question:', requestQuestion.question);
+//     console.log('Solution:', requestQuestion.solution);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
