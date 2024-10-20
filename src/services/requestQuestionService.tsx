@@ -22,13 +22,3 @@ export const fetchRequestQuestion = async (): Promise<RequestQuestion> => {
 
   return data.content;
 };
-
-// const getRequestQuestion = async () => {
-//   try {
-//     const requestQuestion = await fetchRequestQuestion();
-//     console.log('Question:', requestQuestion.question);
-//     console.log('Solution:', requestQuestion.solution);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };

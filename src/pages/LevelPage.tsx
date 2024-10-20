@@ -106,14 +106,14 @@ const LevelPage: React.FC = () => {
   };
 
   const sendProgressData = async () => {
-    const userId = 1;
+    const userId = localStorage.getItem('userId');
     const levelId = Number(id);
     const timeTaken = getTimeByDifficulty(difficulty) - timeLeft;
 
     const progressData = {
-      marks: 10,
+      marks: timeLeft,
       timeInSeconds: timeTaken,
-      user: { id: userId },
+      user: { id: Number(userId) },
       level: { id: levelId },
     };
 
