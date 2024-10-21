@@ -16,7 +16,6 @@ const RegisterPage: React.FC = () => {
   const [lastName, setLastName] = useState('');
   const [contactNo, setContactNo] = useState('');
   const [genderType, setGenderType] = useState<GenderType | ''>('');
-  //const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -33,7 +32,6 @@ const RegisterPage: React.FC = () => {
         contactNo,
         genderType,
         email,
-        //passWord: password,
       };
       await createUser(newUser);
       navigate('/');
