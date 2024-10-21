@@ -28,6 +28,7 @@ export interface User {
   role: string;
   email: string;
   passWord: string;
+  firstTimeLogin: boolean;
   vehicle: Vehicle[];
 }
 
@@ -87,7 +88,7 @@ export const createUser = async (newUser: Partial<User>): Promise<User> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${getToken()}`,
+      //'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(newUser),
   });
@@ -125,7 +126,7 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${getToken()}`,
+      //'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify({ email, passWord }),
   });

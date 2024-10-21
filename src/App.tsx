@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import LevelSelection from './pages/LevelSelection';
 import LevelPage from './pages/LevelPage';
 import LeaderBoard from './pages/LeaderBoard';
+import RegisterPage from './pages/RegisterPage';
+import PasswordResetPage from './pages/PasswordResetPage';
 
 const App: React.FC = () => {
   
@@ -12,6 +14,8 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/password-reset" element={<PasswordResetPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/play" element={<LevelSelection />} />
         <Route path="/level/:id" element={<LevelPage />} />
