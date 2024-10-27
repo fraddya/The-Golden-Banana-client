@@ -199,6 +199,25 @@ const LevelPage: React.FC = () => {
           },
         }}
       >
+
+<Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          textAlign: 'center',
+          backgroundColor: 'rgba(255, 242, 117, 0.7)', // Banana yellow theme
+          padding: '30px',
+          borderRadius: '20px',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
+          width: '60%',
+          //maxWidth: '1200px',
+          //width: '900px',
+          height: '70%',
+        }}
+      >
         <Typography variant="h4" sx={{ marginBottom: '20px', zIndex: 1 }}>
           Time Left: {timeLeft}s
         </Typography>
@@ -207,8 +226,8 @@ const LevelPage: React.FC = () => {
           sx={{
             backgroundImage: `url(${questionData.question})`,
             backgroundSize: 'cover',
-            width: '300px',
-            height: '200px',
+            width: '50%',
+            height: '50%',
             borderRadius: '10px',
             boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
             zIndex: 1,
@@ -231,6 +250,7 @@ const LevelPage: React.FC = () => {
               {answer}
             </Button>
           ))}
+          </Box>
         </Box>
 
         {/* Dialog for time up, wrong answer, or correct answer */}
