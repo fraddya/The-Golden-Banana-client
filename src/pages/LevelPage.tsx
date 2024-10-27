@@ -16,6 +16,7 @@ const LevelPage: React.FC = () => {
   const [difficulty, setDifficulty] = useState<string>('EASY');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogMessage, setDialogMessage] = useState<string>('');
+  const [isPaused, setIsPaused] = useState<boolean>(false); // New state to control timer
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const LevelPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (questionLoaded && timeLeft > 0) {
+    if (questionLoaded && timeLeft > 0 && !isPaused) { // Check isPaused
       const timer = setInterval(() => {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
@@ -63,11 +64,12 @@ const LevelPage: React.FC = () => {
       return () => clearInterval(timer);
     }
 
-    if (questionLoaded && timeLeft === 0) {
+    if (questionLoaded && timeLeft === 0 && !isPaused) {
       setDialogMessage('Time is Up!!');
       setOpenDialog(true);
+      setIsPaused(true); // Pause timer on time up
     }
-  }, [timeLeft, questionLoaded]);
+  }, [timeLeft, questionLoaded, isPaused]);
 
   const loadQuestion = async (difficulty: string) => {
     try {
@@ -95,14 +97,14 @@ const LevelPage: React.FC = () => {
   };
 
   const handleAnswerClick = async (answer: number) => {
+    setIsPaused(true); // Pause timer on answer click
     if (answer === correctAnswer) {
       await sendProgressData();
       setDialogMessage("Congrats! You finished the level.");
-      setOpenDialog(true);
     } else {
       setDialogMessage("Oops! Wrong answer.");
-      setOpenDialog(true);
     }
+    setOpenDialog(true);
   };
 
   const sendProgressData = async () => {
@@ -127,6 +129,7 @@ const LevelPage: React.FC = () => {
   const handleRetry = () => {
     setOpenDialog(false);
     setHeartbeat(false);
+    setIsPaused(false); // Resume timer on retry
     setTimeLeft(getTimeByDifficulty(difficulty));
     loadQuestion(difficulty);
   };
@@ -162,116 +165,133 @@ const LevelPage: React.FC = () => {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        height: '100%',
         justifyContent: 'center',
-        height: '100vh',
-        position: 'relative',
-        overflow: 'hidden',
-        background: timeLeft <= 5
-          ? `radial-gradient(circle at center, rgba(255, 255, 255, 0) 60%, rgba(255, 0, 0, 0.6) 100%)`
-          : 'none',
-        animation: heartbeat ? 'panicEffect 1.0s infinite' : 'none',
-        '@keyframes panicEffect': {
-          '0%': { opacity: 0.8 },
-          '50%': { opacity: 1 },
-          '100%': { opacity: 0.8 },
-        },
+        alignItems: 'center',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundImage: `url(./images/background.png)`,
+        backgroundColor: '#E3F9A6',
+        zIndex: 2,
+        outline: '4px solid #C69C6D', // Light brown outline
+        borderRadius: '25px',
+        padding: '20px',
       }}
     >
-      <Typography variant="h4" sx={{ marginBottom: '20px', zIndex: 1 }}>
-        Time Left: {timeLeft}s
-      </Typography>
-
       <Box
         sx={{
-          backgroundImage: `url(${questionData.question})`,
-          backgroundSize: 'cover',
-          width: '300px',
-          height: '200px',
-          borderRadius: '10px',
-          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
-          zIndex: 1,
-        }}
-      />
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: '20px', zIndex: 1 }}>
-        {answers.map(answer => (
-          <Button
-            key={answer}
-            variant="contained"
-            onClick={() => handleAnswerClick(answer)}
-            sx={{
-              backgroundColor: '#8D6E63',
-              color: 'white',
-              padding: '10px 20px',
-              '&:hover': { backgroundColor: '#7B5B42' },
-            }}
-          >
-            {answer}
-          </Button>
-        ))}
-      </Box>
-
-      {/* Dialog for time up, wrong answer, or correct answer */}
-      <Dialog
-  open={openDialog}
-  onClose={() => setOpenDialog(false)}
-  PaperProps={{
-    style: {
-      backgroundColor: 'yellow', // Set yellow background
-      padding: '20px',
-      borderRadius: '10px',
-    },
-  }}
->
-  <DialogTitle>{dialogMessage}</DialogTitle>
-  <DialogContent>
-    <DialogContentText>
-      {dialogMessage === 'Congrats! You finished the level.'
-        ? 'Well done! Click to proceed to the next level.'
-        : 'Do you want to retry or go back to the main menu?'}
-    </DialogContentText>
-  </DialogContent>
-  <DialogActions>
-    {dialogMessage === 'Congrats! You finished the level.' ? (
-      <Button
-        onClick={handlePlayAgain}
-        sx={{
-          backgroundColor: '#8D6E63', // Brown button
-          color: 'white',
-          '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          width : '100%',
+          position: 'relative',
+          overflow: 'hidden',
+          background: timeLeft <= 5 && !isPaused
+            ? `radial-gradient(circle at center, rgba(255, 255, 255, 0) 60%, rgba(255, 0, 0, 0.6) 100%)`
+            : 'none',
+          animation: heartbeat && !isPaused ? 'panicEffect 1.0s infinite' : 'none',
+          '@keyframes panicEffect': {
+            '0%': { opacity: 0.8 },
+            '50%': { opacity: 1 },
+            '100%': { opacity: 0.8 },
+          },
         }}
       >
-        Play Again
-      </Button>
-    ) : (
-      <>
-        <Button
-          onClick={handleRetry}
-          sx={{
-            backgroundColor: '#8D6E63', // Brown button
-            color: 'white',
-            '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
-          }}
-        >
-          Try Again
-        </Button>
-        <Button
-          onClick={handleMainMenu}
-          sx={{
-            backgroundColor: '#8D6E63', // Brown button
-            color: 'white',
-            '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
-          }}
-        >
-          Main Menu
-        </Button>
-      </>
-    )}
-  </DialogActions>
-</Dialog>
+        <Typography variant="h4" sx={{ marginBottom: '20px', zIndex: 1 }}>
+          Time Left: {timeLeft}s
+        </Typography>
 
+        <Box
+          sx={{
+            backgroundImage: `url(${questionData.question})`,
+            backgroundSize: 'cover',
+            width: '300px',
+            height: '200px',
+            borderRadius: '10px',
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
+            zIndex: 1,
+          }}
+        />
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '80%', marginTop: '20px', zIndex: 1 }}>
+          {answers.map(answer => (
+            <Button
+              key={answer}
+              variant="contained"
+              onClick={() => handleAnswerClick(answer)}
+              sx={{
+                backgroundColor: '#8D6E63',
+                color: 'white',
+                padding: '10px 20px',
+                '&:hover': { backgroundColor: '#7B5B42' },
+              }}
+            >
+              {answer}
+            </Button>
+          ))}
+        </Box>
+
+        {/* Dialog for time up, wrong answer, or correct answer */}
+        <Dialog
+          open={openDialog}
+          onClose={() => setOpenDialog(false)}
+          PaperProps={{
+            style: {
+              backgroundColor: 'yellow', // Set yellow background
+              padding: '20px',
+              borderRadius: '10px',
+            },
+          }}
+        >
+          <DialogTitle>{dialogMessage}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {dialogMessage === 'Congrats! You finished the level.'
+                ? 'Well done! Click to proceed to the next level.'
+                : 'Do you want to retry or go back to the main menu?'}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            {dialogMessage === 'Congrats! You finished the level.' ? (
+              <Button
+                onClick={handlePlayAgain}
+                sx={{
+                  backgroundColor: '#8D6E63', // Brown button
+                  color: 'white',
+                  '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+                }}
+              >
+                Play Again
+              </Button>
+            ) : (
+              <>
+                <Button
+                  onClick={handleRetry}
+                  sx={{
+                    backgroundColor: '#8D6E63', // Brown button
+                    color: 'white',
+                    '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+                  }}
+                >
+                  Try Again
+                </Button>
+                <Button
+                  onClick={handleMainMenu}
+                  sx={{
+                    backgroundColor: '#8D6E63', // Brown button
+                    color: 'white',
+                    '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+                  }}
+                >
+                  Main Menu
+                </Button>
+              </>
+            )}
+          </DialogActions>
+        </Dialog>
+      </Box>
     </Box>
   );
 };
