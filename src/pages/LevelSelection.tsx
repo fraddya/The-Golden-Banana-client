@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import WebFont from 'webfontloader';
 import { Box, Typography, Button, Grid, CircularProgress } from '@mui/material';
 import { fetchLevelSuggestions, Level } from '../services/levelService'; // Assuming your service layer is in api.ts
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +14,13 @@ const LevelSelection: React.FC = () => {
   };
 
   useEffect(() => {
+    // Load the font
+    WebFont.load({
+      google: {
+        families: ['DynaPuff:400,700', 'sans-serif'],
+      },
+    });
+
     const fetchAllLevels = async () => {
       try {
         const levelData = await fetchLevelSuggestions(); // Using the updated service call
@@ -41,21 +49,29 @@ const LevelSelection: React.FC = () => {
           <Button
           onClick={() => handleLevelClick(level)}
             sx={{
-              backgroundColor: '#FFD600', // Banana yellow for buttons
-              color: '#6D4C41', // Brown text
+              //backgroundColor: '#FFD600', // Banana yellow for buttons
+              color: '#fff', // Brown text
               padding: '0', // Remove default padding
               minWidth: '100px', // Set a minimum width
               height: '100px', // Keep height for square shape
-              borderRadius: '10px', // Keep border radius
-              border: '2px solid #6D4C41', // Add border with brown color
-              fontSize: '16px',
+              //borderRadius: '10px', // Keep border radius
+              //border: '2px solid #6D4C41', // Add border with brown color
+              fontSize: '18px',
               fontWeight: 'bold',
               textAlign: 'center', // Ensure text is centered
-              '&:hover': { backgroundColor: '#FFEB3B' },
+              fontFamily: 'DynaPuff, sans-serif', // Use DynaPuff font here
+              '&:hover': { 
+                //backgroundColor: '#FFEB3B', 
+                transform: 'scale(1.05)', // Zoom effect on hover
+                transition: 'transform 0.2s ease-in-out' // Smooth transition
+              },
               boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)', // Button shadow
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              backgroundImage: `url(./images/button/normal_button.png)`,
+              backgroundSize: 'cover', // Fit the image within the button's size
+              backgroundPosition: 'center', // Center the image within the button
             }}
           >
             {level.name}

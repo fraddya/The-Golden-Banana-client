@@ -200,7 +200,7 @@ const LevelPage: React.FC = () => {
         }}
       >
 
-<Box
+      <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -216,6 +216,8 @@ const LevelPage: React.FC = () => {
           //maxWidth: '1200px',
           //width: '900px',
           height: '70%',
+          backgroundImage: `url(./images/wood_2.png)`,
+          border: '10px solid #6D4C41',
         }}
       >
         <Typography variant="h4" sx={{ marginBottom: '20px', zIndex: 1 }}>
