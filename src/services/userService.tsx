@@ -1,5 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
-const getToken = () => localStorage.getItem('token');
+const getToken = () => sessionStorage.getItem('token');
 
 export interface Vehicle {
   vehicleNo: string;
@@ -140,9 +140,9 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
 
   const data = await response.json();
   
-  // Store token in local storage
-  localStorage.setItem('token', data.content.token);
-  localStorage.setItem('userId', data.content.id);
+  // Store token in session storage
+  sessionStorage.setItem('token', data.content.token);
+  sessionStorage.setItem('userId', data.content.id);
 
   return data.content;
 };

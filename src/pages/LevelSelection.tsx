@@ -112,6 +112,8 @@ const LevelSelection: React.FC = () => {
           //maxWidth: '1200px',
           //width: '900px',
           height: 'auto',
+          backgroundImage: `url(./images/wood_2.png)`,
+          border: '10px solid #6D4C41',
         }}
       >
 
@@ -150,11 +152,13 @@ const LevelSelection: React.FC = () => {
           boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
           width: 'auto',
           maxWidth: '1200px',
+          backgroundImage: `url(./images/wood.webp)`,
+          marginBottom: '20px',
         }}
       >
 
         {/* Easy Levels */}
-        <Typography variant="h4" sx={{ color: '#6D4C41', fontWeight: 'bold', marginBottom: '10px' , paddingBottom: '20px'}}>
+        <Typography variant="h4" sx={{ color: '#fff', fontWeight: 'bold', marginBottom: '10px' , paddingBottom: '20px'}}>
           Easy Levels 🍃
         </Typography>
         <Grid container spacing={2}>
@@ -175,11 +179,13 @@ const LevelSelection: React.FC = () => {
           boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
           width: 'auto',
           maxWidth: '1200px',
+          backgroundImage: `url(./images/wood.webp)`,
+          marginBottom: '20px',
         }}
       >
 
         {/* Medium Levels */}
-        <Typography variant="h4" sx={{ color: '#6D4C41', fontWeight: 'bold', marginTop: '20px', marginBottom: '10px' , paddingBottom: '20px' }}>
+        <Typography variant="h4" sx={{ color: '#fff', fontWeight: 'bold', marginTop: '20px', marginBottom: '10px' , paddingBottom: '20px' }}>
           Mid Levels 🍇
         </Typography>
         <Grid container spacing={2}>
@@ -199,11 +205,13 @@ const LevelSelection: React.FC = () => {
           boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
           width: 'auto',
           maxWidth: '1200px',
+          backgroundImage: `url(./images/wood.webp)`,
+          marginBottom: '20px',
         }}
       >
 
         {/* Hard Levels */}
-        <Typography variant="h4" sx={{ color: '#6D4C41', fontWeight: 'bold', marginTop: '20px', marginBottom: '10px' , paddingBottom: '20px' }}>
+        <Typography variant="h4" sx={{ color: '#fff', fontWeight: 'bold', marginTop: '20px', marginBottom: '10px' , paddingBottom: '20px' }}>
           Hard Levels 🔥
         </Typography>
         <Grid container spacing={2}>
@@ -224,11 +232,13 @@ const LevelSelection: React.FC = () => {
           boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
           width: 'auto',
           maxWidth: '1200px',
+          backgroundImage: `url(./images/wood.webp)`,
+          marginBottom: '20px',
         }}
       >
 
         {/* Epilogue Levels */}
-        <Typography variant="h4" sx={{ color: '#6D4C41', fontWeight: 'bold', marginTop: '20px', marginBottom: '10px', paddingBottom: '20px' }}>
+        <Typography variant="h4" sx={{ color: '#fff', fontWeight: 'bold', marginTop: '20px', marginBottom: '10px', paddingBottom: '20px' }}>
           Epilogue 🌴
         </Typography>
         <Grid container spacing={2}>

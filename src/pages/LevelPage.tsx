@@ -108,7 +108,7 @@ const LevelPage: React.FC = () => {
   };
 
   const sendProgressData = async () => {
-    const userId = localStorage.getItem('userId');
+    const userId = sessionStorage.getItem('userId');
     const levelId = Number(id);
     const timeTaken = getTimeByDifficulty(difficulty) - timeLeft;
 

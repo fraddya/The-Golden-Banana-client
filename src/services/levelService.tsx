@@ -1,5 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
-const getToken = () => localStorage.getItem('token');
+const getToken = () => sessionStorage.getItem('token');
 
 export interface Level {
   id: number;

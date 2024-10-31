@@ -55,8 +55,11 @@ const Dashboard: React.FC = () => {
           borderRadius: '20px',
           backdropFilter: 'blur(10px)',
           boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.6)', // Soft yellow glow
-          width: '900px',
-          height: '600px',
+          width: '60%',
+          height: '60%',
+          backgroundImage: `url(./images/wood_2.png)`,
+          border: '10px solid #000',
+          backgroundSize: 'cover',
         }}
       >
         <Box
@@ -67,7 +70,9 @@ const Dashboard: React.FC = () => {
             borderRadius: '20px',
             backdropFilter: 'blur(10px)',
             boxShadow: '0px 0px 20px rgba(255, 195, 0, 0.9)', // Soft yellow glow  0px 0px 20px rgba(255, 195, 0, 0.8)
-            width: '600px',
+            width: '70%',
+            height: '50%',
+            border: '10px solid #714424',
             //outline: '5px solid #8D6E63', // Light brown/dark yellow outline for separation
           }}
         >
