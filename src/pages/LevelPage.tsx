@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { fetchRequestQuestion, RequestQuestion } from '../services/requestQuestionService'; 
 import { createUserLevelProgress } from '../services/UserLevelProgressService';
 import { fetchLevelById } from '../services/levelService';
+import WebFont from 'webfontloader';
 
 const LevelPage: React.FC = () => {
   const { id } = useParams();
@@ -20,6 +21,13 @@ const LevelPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    WebFont.load({
+      google: {
+        families: ['DynaPuff:400,700', 'sans-serif'],
+      },
+    });
+
     loadLevelDetails();
   }, []);
 
@@ -272,28 +280,34 @@ const LevelPage: React.FC = () => {
           onClose={() => setOpenDialog(false)}
           PaperProps={{
             style: {
-              backgroundColor: 'yellow', // Set yellow background
+              backgroundImage: `url(./images/wood_wall.jpg)`,
+              backgroundSize: 'cover',
+              backgroundColor: '#FFEB3B',
               padding: '20px',
               borderRadius: '10px',
+              fontFamily: 'DynaPuff, sans-serif',
+              fontWeight: 'bold',
             },
           }}
         >
-          <DialogTitle>{dialogMessage}</DialogTitle>
+          <DialogTitle sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold' }}>{dialogMessage}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold' }}>
               {dialogMessage === 'Congrats! You finished the level.'
                 ? 'Well done! Click to proceed to the next level.'
                 : 'Do you want to retry or go back to the main menu?'}
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
+          <DialogActions sx={{ justifyContent: 'center' }}>
             {dialogMessage === 'Congrats! You finished the level.' ? (
               <Button
                 onClick={handlePlayAgain}
                 sx={{
-                  backgroundColor: '#8D6E63', // Brown button
+                  backgroundColor: '#8D6E63',
                   color: 'white',
-                  '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+                  fontFamily: 'DynaPuff, sans-serif',
+                  fontWeight: 'bold',
+                  '&:hover': { backgroundColor: '#7B5B42' },
                 }}
               >
                 Play Again
@@ -303,9 +317,11 @@ const LevelPage: React.FC = () => {
                 <Button
                   onClick={handleRetry}
                   sx={{
-                    backgroundColor: '#8D6E63', // Brown button
+                    backgroundColor: '#8D6E63',
                     color: 'white',
-                    '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+                    fontFamily: 'DynaPuff, sans-serif',
+                    fontWeight: 'bold',
+                    '&:hover': { backgroundColor: '#7B5B42' },
                   }}
                 >
                   Try Again
@@ -313,9 +329,11 @@ const LevelPage: React.FC = () => {
                 <Button
                   onClick={handleMainMenu}
                   sx={{
-                    backgroundColor: '#8D6E63', // Brown button
+                    backgroundColor: '#8D6E63',
                     color: 'white',
-                    '&:hover': { backgroundColor: '#7B5B42' }, // Darker brown on hover
+                    fontFamily: 'DynaPuff, sans-serif',
+                    fontWeight: 'bold',
+                    '&:hover': { backgroundColor: '#7B5B42' },
                   }}
                 >
                   Main Menu
