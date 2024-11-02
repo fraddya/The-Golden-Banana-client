@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchRequestQuestion, RequestQuestion } from '../services/requestQuestionService'; 
 import { createUserLevelProgress } from '../services/UserLevelProgressService';
@@ -158,7 +158,18 @@ const LevelPage: React.FC = () => {
   };
 
   if (!questionData) {
-    return <div>Loading...</div>;
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
