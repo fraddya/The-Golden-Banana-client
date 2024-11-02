@@ -13,6 +13,10 @@ const LevelSelection: React.FC = () => {
     navigate(`/level/${level.id}`); // Redirect to the new level page
   };
 
+  const handleHomeClick = () => {
+    navigate('/dashboard');
+  };
+
   useEffect(() => {
     // Load the font
     WebFont.load({
@@ -132,6 +136,42 @@ const LevelSelection: React.FC = () => {
           border: '10px solid #6D4C41',
         }}
       >
+
+      <Button
+      onClick={() => handleHomeClick()}
+        sx={{
+          position: 'absolute',
+          right: '1%',
+          bottom: '84%',
+          height: '14%',
+          width: '14%',
+          background: 'url(./images/button/woden_home_button.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-12px)' },
+          },
+        }}
+      />
+
+      <Button
+      onClick={() => handleHomeClick()}
+        sx={{
+          position: 'absolute',
+          left: '1%',
+          bottom: '84%',
+          height: '14%',
+          width: '14%',
+          background: 'url(./images/button/wood_back_button.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-12px)' },
+          },
+        }}
+      />
 
         <Box
         sx={{
