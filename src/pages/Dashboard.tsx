@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = sessionStorage.getItem('token');
+    
+    if (!token) {
+      // Redirect to login page if no token is found
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handlePlayClick = () => {
     navigate('/play');

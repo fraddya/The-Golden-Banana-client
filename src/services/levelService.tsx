@@ -1,6 +1,14 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 const getToken = () => sessionStorage.getItem('token');
 
+// Helper function to handle 403 errors and redirect to login
+const handleUnauthorizedAccess = (status: number) => {
+  if (status === 403) {
+    sessionStorage.clear();
+    window.location.href = '/'; // Adjust this to the path of your login page
+  }
+};
+
 export interface Level {
   id: number;
   name: string;
@@ -18,6 +26,7 @@ export const fetchLevels = async (): Promise<Level[]> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to fetch levels');
   }
 
@@ -35,6 +44,7 @@ export const fetchLevelById = async (id: number): Promise<Level> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to fetch level with ID ${id}`);
   }
 
@@ -54,6 +64,7 @@ export const createLevel = async (newLevel: Partial<Level>): Promise<Level> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to create level');
   }
 
@@ -73,6 +84,7 @@ export const updateLevel = async (id: number, updatedLevel: Partial<Level>): Pro
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to update level with ID ${id}`);
   }
 
@@ -90,6 +102,7 @@ export const deleteLevel = async (id: number): Promise<void> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to delete level with ID ${id}`);
   }
 };
@@ -104,6 +117,7 @@ export const fetchLevelSuggestions = async (): Promise<Level[]> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to fetch level suggestions');
   }
 
