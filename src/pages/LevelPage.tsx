@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress } from '@mui/material';
+import { Box, Button, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress, LinearProgress } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchRequestQuestion, RequestQuestion } from '../services/requestQuestionService'; 
 import { createUserLevelProgress } from '../services/UserLevelProgressService';
@@ -239,9 +239,75 @@ const LevelPage: React.FC = () => {
           border: '10px solid #6D4C41',
         }}
       >
-        <Typography variant="h4" sx={{ marginBottom: '20px', zIndex: 1 }}>
+
+     <Button
+      onClick={() => handleMainMenu()}
+        sx={{
+          position: 'absolute',
+          right: '1%',
+          bottom: '84%',
+          height: '14%',
+          width: '14%',
+          background: 'url(./images/button/woden_home_button.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-12px)' },
+          },
+        }}
+      />
+
+    <Button
+      onClick={() => handleRetry()}
+        sx={{
+          position: 'absolute',
+          left: '1%',
+          bottom: '84%',
+          height: '14%',
+          width: '14%',
+          background: 'url(./images/button/wood_reload_button.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-12px)' },
+          },
+        }}
+      />
+
+        <Typography
+          variant="h4"
+          sx={{
+            marginBottom: '20px',
+            zIndex: 1,
+            fontSize: timeLeft <= 5 ? '2.5rem' : '2rem',
+            color: timeLeft <= 5 ? '#FF0000' : 'black',
+            animation: timeLeft <= 5 ? 'pulse 0.5s infinite' : 'none',
+            '@keyframes pulse': {
+              '0%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.1)' },
+              '100%': { transform: 'scale(1)' },
+            },
+          }}
+        >
           Time Left: {timeLeft}s
         </Typography>
+
+        <Box sx={{ width: '80%', margin: '20px 0' }}>
+          <LinearProgress
+            variant="determinate"
+            value={(timeLeft / getTimeByDifficulty(difficulty)) * 100}
+            sx={{
+              height: '10px',
+              backgroundColor: '#ccc',
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: timeLeft <= 5 ? '#FF0000' : '#8D6E63',
+                transition: 'background-color 0.5s ease',
+              },
+            }}
+          />
+        </Box>
 
         <Box
           sx={{
@@ -265,7 +331,19 @@ const LevelPage: React.FC = () => {
                 backgroundColor: '#8D6E63',
                 color: 'white',
                 padding: '10px 20px',
-                '&:hover': { backgroundColor: '#7B5B42' },
+                fontFamily: 'DynaPuff, sans-serif', 
+              '&:hover': { 
+                //backgroundColor: '#FFEB3B', 
+                transform: 'scale(1.05)',
+                transition: 'transform 0.2s ease-in-out'
+              },
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundImage: `url(./images/button/normal_button.png)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
               }}
             >
               {answer}
