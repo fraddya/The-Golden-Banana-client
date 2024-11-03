@@ -21,8 +21,8 @@ const LoginPage: React.FC = () => {
       if (user.firstTimeLogin) {
         navigate('/password-reset'); // Redirect to password reset page
       } else if (user.role === 'USER') {
-        localStorage.setItem('userRole', user.role);
-        localStorage.setItem('userName', user.firstName);
+        sessionStorage.setItem('userRole', user.role);
+        sessionStorage.setItem('userName', user.firstName);
         navigate('/dashboard');
       } else {
         setError("User Not Authorized");

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
@@ -9,6 +9,10 @@ import RegisterPage from './pages/RegisterPage';
 import PasswordResetPage from './pages/PasswordResetPage';
 
 const App: React.FC = () => {
+
+  useEffect(() => {
+    document.title = "The Golden Banana";
+  }, []);
   
   return (
     <Router>

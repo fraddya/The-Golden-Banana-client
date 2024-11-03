@@ -22,7 +22,7 @@ const PasswordResetPage: React.FC = () => {
 
     setLoading(true);
     try {
-      const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
+      const userId = sessionStorage.getItem('userId'); // Get the logged-in user's ID
       if (userId) {
         await updateUser(Number(userId), { passWord: newPassword });
         setOpen(true); // Open the success dialog

@@ -1,5 +1,18 @@
 const apiUrl = process.env.REACT_APP_API_URL;
-const getToken = () => localStorage.getItem('token');
+const getToken = () => sessionStorage.getItem('token');
+
+// Helper function to handle 403 errors and redirect to login
+const handleUnauthorizedAccess = (status: number) => {
+  if (status === 403) {
+    sessionStorage.clear();
+    window.location.href = '/'; // Adjust this to the path of your login page
+  }
+};
+
+// Session check
+export const isAuthenticated = (): boolean => {
+  return !!sessionStorage.getItem('token');
+};
 
 export interface Vehicle {
   vehicleNo: string;
@@ -42,6 +55,7 @@ export const fetchEmployees = async (): Promise<User[]> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to fetch employees');
   }
 
@@ -58,7 +72,8 @@ export const fetchUsers = async (): Promise<User[]> => {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch employees');
+    handleUnauthorizedAccess(response.status);
+    throw new Error('Failed to fetch users');
   }
 
   const data = await response.json();
@@ -75,6 +90,7 @@ export const fetchUserById = async (id: number): Promise<User> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to fetch user with ID ${id}`);
   }
 
@@ -94,6 +110,7 @@ export const createUser = async (newUser: Partial<User>): Promise<User> => {
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to create user');
   }
 
@@ -113,6 +130,7 @@ export const updateUser = async (id: number, updatedUser: Partial<User>): Promis
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to update user with ID ${id}`);
   }
 
@@ -126,7 +144,6 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      //'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify({ email, passWord }),
   });
@@ -136,14 +153,15 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
     throw new Error(errorResponse.validationFailures[0].message);
   } else if (response.status === 500) {
     throw new Error('Server Error');
+  } else if (response.status === 403) {
+    handleUnauthorizedAccess(response.status);
   }
 
   const data = await response.json();
-  
-  // Store token in local storage
-  localStorage.setItem('token', data.content.token);
-  localStorage.setItem('userId', data.content.id);
+
+  // Store token in session storage
+  sessionStorage.setItem('token', data.content.token);
+  sessionStorage.setItem('userId', data.content.id);
 
   return data.content;
 };
-
