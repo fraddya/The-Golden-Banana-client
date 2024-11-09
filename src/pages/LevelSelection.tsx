@@ -10,7 +10,7 @@ const LevelSelection: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLevelClick = (level: Level) => {
-    navigate(`/level/${level.id}`); // Redirect to the new level page
+    navigate(`/level/${level.id}`);
   };
 
   const handleHomeClick = () => {
@@ -27,7 +27,7 @@ const LevelSelection: React.FC = () => {
 
     const fetchAllLevels = async () => {
       try {
-        const levelData = await fetchLevelSuggestions(); // Using the updated service call
+        const levelData = await fetchLevelSuggestions();
         setLevels(levelData);
         setLoading(false);
       } catch (error) {
@@ -47,14 +47,14 @@ const LevelSelection: React.FC = () => {
           key={level.id}
           sx={{
             display: 'flex',
-            justifyContent: 'center', // Center horizontally
+            justifyContent: 'center', 
           }}
         >
           <Button
           onClick={() => handleLevelClick(level)}
             sx={{
               //backgroundColor: '#FFD600', // Banana yellow for buttons
-              color: '#fff', // Brown text
+              color: '#fff',
               padding: '0', // Remove default padding
               minWidth: '100px', // Set a minimum width
               height: '100px', // Keep height for square shape
@@ -111,7 +111,7 @@ const LevelSelection: React.FC = () => {
         backgroundImage: `url(./images/background.png)`,
         backgroundColor: '#E3F9A6',
         zIndex: 2,
-        outline: '4px solid #C69C6D', // Light brown outline
+        outline: '4px solid #C69C6D',
         borderRadius: '25px',
         padding: '20px',
       }}
