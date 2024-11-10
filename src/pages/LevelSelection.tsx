@@ -147,11 +147,11 @@ const LevelSelection: React.FC = () => {
           width: '14%',
           background: 'url(./images/button/woden_home_button.png) no-repeat left bottom',
           backgroundSize: 'contain',
-          animation: 'moveUpDown 2s infinite alternate',
-          '@keyframes moveUpDown': {
-            '0%': { transform: 'translateY(0)' },
-            '100%': { transform: 'translateY(-12px)' },
-          },
+          //animation: 'moveUpDown 2s infinite alternate',
+          // '@keyframes moveUpDown': {
+          //   '0%': { transform: 'translateY(0)' },
+          //   '100%': { transform: 'translateY(-12px)' },
+          // },
         }}
       />
 
@@ -159,17 +159,17 @@ const LevelSelection: React.FC = () => {
       onClick={() => handleHomeClick()}
         sx={{
           position: 'absolute',
-          left: '1%',
-          bottom: '84%',
-          height: '14%',
-          width: '14%',
-          background: 'url(./images/button/wood_back_button.png) no-repeat left bottom',
+          left: '3%',
+          bottom: '86%',
+          height: '10%',
+          width: '10%',
+          background: 'url(./images/button/wood_back_button2.png) no-repeat left bottom',
           backgroundSize: 'contain',
-          animation: 'moveUpDown 2s infinite alternate',
-          '@keyframes moveUpDown': {
-            '0%': { transform: 'translateY(0)' },
-            '100%': { transform: 'translateY(-12px)' },
-          },
+          //animation: 'moveUpDown 2s infinite alternate',
+          // '@keyframes moveUpDown': {
+          //   '0%': { transform: 'translateY(0)' },
+          //   '100%': { transform: 'translateY(-12px)' },
+          // },
         }}
       />
 
