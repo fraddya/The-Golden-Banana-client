@@ -235,7 +235,7 @@ const LevelPage: React.FC = () => {
           //maxWidth: '1200px',
           //width: '900px',
           height: '70%',
-          backgroundImage: `url(./images/wood_2.png)`,
+          backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668324558704691/wood.webp?ex=672fe2fd&is=672e917d&hm=f6651262b56b845ef546936cd020e72ec4877427e3cc7476437b91433ffc5388&)`,
           border: '10px solid #6D4C41',
         }}
       >
@@ -266,7 +266,7 @@ const LevelPage: React.FC = () => {
           bottom: '84%',
           height: '14%',
           width: '14%',
-          background: 'url(./images/button/wood_reload_button.png) no-repeat left bottom',
+          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1303667886748860416/wood_reload_button.png?ex=672c96d5&is=672b4555&hm=606c1fcbfc195dfe4e32915203b5d5558a6ae3412babb7b7449913e603c7f5ba&) no-repeat left bottom',
           backgroundSize: 'contain',
           animation: 'moveUpDown 2s infinite alternate',
           '@keyframes moveUpDown': {
@@ -312,11 +312,13 @@ const LevelPage: React.FC = () => {
         <Box
           sx={{
             backgroundImage: `url(${questionData.question})`,
-            backgroundSize: 'cover',
-            width: '50%',
-            height: '50%',
+            backgroundSize: 'contain',      // Ensures the full image is visible within the box
+            backgroundPosition: 'center',    // Centers the image within the box
+            backgroundRepeat: 'no-repeat',   // Prevents the image from repeating
+            width: '100vh',                   // Adjust width and height as needed to ensure visibility
+            height: '100vh',                 // Makes the box full screen height to fit the image fully
             borderRadius: '10px',
-            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
+            //boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
             zIndex: 1,
           }}
         />
@@ -328,20 +330,25 @@ const LevelPage: React.FC = () => {
               variant="contained"
               onClick={() => handleAnswerClick(answer)}
               sx={{
-                backgroundColor: '#8D6E63',
+                backgroundColor: 'transparent',
                 color: 'white',
-                padding: '10px 20px',
+                padding: '0', 
+                minWidth: '100px', // Set a minimum width
+                height: '100px', // Keep height for square shape
+                fontSize: '18px',
+                fontWeight: 'bold',
+                textAlign: 'center',
                 fontFamily: 'DynaPuff, sans-serif', 
-              '&:hover': { 
-                //backgroundColor: '#FFEB3B', 
+                 '&:hover': { 
+                backgroundColor: 'transparent', 
                 transform: 'scale(1.05)',
                 transition: 'transform 0.2s ease-in-out'
               },
-              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+              //boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundImage: `url(./images/button/normal_button.png)`,
+              backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668435741573200/normal_button.png?ex=672c9758&is=672b45d8&hm=32271ada9059f41954602fdbb5c914f0ac9fdfe6fc60751a9a21ce4d0281efa0&)`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               }}
@@ -358,7 +365,7 @@ const LevelPage: React.FC = () => {
           onClose={() => setOpenDialog(false)}
           PaperProps={{
             style: {
-              backgroundImage: `url(./images/wood_wall.jpg)`,
+              backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668324558704691/wood.webp?ex=672fe2fd&is=672e917d&hm=f6651262b56b845ef546936cd020e72ec4877427e3cc7476437b91433ffc5388&)`,
               backgroundSize: 'cover',
               backgroundColor: '#FFEB3B',
               padding: '20px',
@@ -370,7 +377,7 @@ const LevelPage: React.FC = () => {
         >
           <DialogTitle sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold' }}>{dialogMessage}</DialogTitle>
           <DialogContent>
-            <DialogContentText sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold' }}>
+            <DialogContentText sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold', color: 'white' }}>
               {dialogMessage === 'Congrats! You finished the level.'
                 ? 'Well done! Click to proceed to the next level.'
                 : 'Do you want to retry or go back to the main menu?'}
