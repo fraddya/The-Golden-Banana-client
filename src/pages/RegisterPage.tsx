@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box, Paper, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from '../services/userService';  // Import the createUser function from your service
+import { createUser } from '../services/userService';
 
 // Enum to represent GenderType options
 enum GenderType {
@@ -68,6 +68,24 @@ const RegisterPage: React.FC = () => {
         zIndex: 2,
       }}
     >
+
+      <Box
+        sx={{
+          position: 'absolute',
+          right: '10%',
+          bottom: '25%',
+          height: '80%',
+          width: '30%',
+          background: 'url(./images/banana_man.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-20px)' },
+          },
+        }}
+      />
+
       <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1 }}>
         <Paper
           elevation={3}
@@ -90,7 +108,18 @@ const RegisterPage: React.FC = () => {
               required
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             />
             <TextField
@@ -99,7 +128,18 @@ const RegisterPage: React.FC = () => {
               required
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             />
             <TextField
@@ -108,7 +148,18 @@ const RegisterPage: React.FC = () => {
               required
               value={contactNo}
               onChange={(e) => setContactNo(e.target.value)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             />
             <TextField
@@ -118,7 +169,18 @@ const RegisterPage: React.FC = () => {
               required
               value={genderType}
               onChange={(e) => setGenderType(e.target.value as GenderType)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             >
               <MenuItem value={GenderType.MALE}>Male</MenuItem>
@@ -132,7 +194,18 @@ const RegisterPage: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             />
             {error && <Typography color="error" align="center" sx={{ marginBottom: '20px' }}>{error}</Typography>}

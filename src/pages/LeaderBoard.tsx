@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText, Card, CardContent, Button } from '@mui/material';
-import { getLeaderBoards } from '../services/UserLevelProgressService'; // Make sure the API call is correctly implemented
+import { getLeaderBoards } from '../services/UserLevelProgressService';
 import { useNavigate } from 'react-router-dom';
 
 const LeaderBoard: React.FC = () => {
@@ -11,7 +11,7 @@ const LeaderBoard: React.FC = () => {
     const fetchLeaderBoard = async () => {
       try {
         const response = await getLeaderBoards();
-        setLeaderboard(response.content); // Assuming "content" is the array of leaderboard data
+        setLeaderboard(response.content);
       } catch (error) {
         console.error('Failed to fetch leaderboard data', error);
       }
@@ -91,11 +91,11 @@ const LeaderBoard: React.FC = () => {
           width: '14%',
           background: 'url(./images/button/woden_home_button.png) no-repeat left bottom',
           backgroundSize: 'contain',
-          animation: 'moveUpDown 2s infinite alternate',
-          '@keyframes moveUpDown': {
-            '0%': { transform: 'translateY(0)' },
-            '100%': { transform: 'translateY(-12px)' },
-          },
+          // animation: 'moveUpDown 2s infinite alternate',
+          // '@keyframes moveUpDown': {
+          //   '0%': { transform: 'translateY(0)' },
+          //   '100%': { transform: 'translateY(-12px)' },
+          // },
         }}
       />
 
@@ -119,7 +119,7 @@ const LeaderBoard: React.FC = () => {
           <Box
             sx={{
               display: 'flex',
-              flexDirection: 'column', // Change to column to stack items vertically
+              flexDirection: 'column',
               alignItems: 'center',
               width: '100%',
               gap: '20px',
@@ -162,7 +162,7 @@ const LeaderBoard: React.FC = () => {
               <ListItem
                 key={index + 3}
                 sx={{
-                  backgroundColor: '#FFF176', // Light yellow background for each item
+                  backgroundColor: '#FFF176',
                   marginBottom: '10px',
                   borderRadius: '10px',
                   padding: '15px',

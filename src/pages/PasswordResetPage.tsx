@@ -55,6 +55,25 @@ const PasswordResetPage: React.FC = () => {
         zIndex: 2,
       }}
     >
+
+      
+     <Box
+        sx={{
+          position: 'absolute',
+          right: '10%',
+          bottom: '25%',
+          height: '80%',
+          width: '30%',
+          background: 'url(./images/banana_man.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-20px)' },
+          },
+        }}
+      />
+      
       <Container maxWidth="sm">
         <Paper
           elevation={3}
@@ -67,7 +86,7 @@ const PasswordResetPage: React.FC = () => {
             border: '1px solid rgba(255, 255, 255, 0.3)',
           }}
         >
-          <Typography variant="h3" gutterBottom align="center">
+          <Typography variant="h3" gutterBottom align="center" sx={{ marginBottom: '10px', color: '#6D4C41', fontWeight: 'bold' }}>
             Reset Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit}>
@@ -78,7 +97,19 @@ const PasswordResetPage: React.FC = () => {
               required
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
+              variant="outlined"
             />
             <TextField
               label="Confirm Password"
@@ -87,7 +118,19 @@ const PasswordResetPage: React.FC = () => {
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              sx={{ marginBottom: '20px' }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
+              variant="outlined"
             />
             {error && <Typography color="error" align="center">{error}</Typography>}
             <Button
@@ -96,6 +139,7 @@ const PasswordResetPage: React.FC = () => {
               color="primary"
               fullWidth
               disabled={loading}
+              sx={{ padding: '10px 0', backgroundColor: '#6D4C41' }}
             >
               {loading ? 'Updating...' : 'Reset Password'}
             </Button>
@@ -123,7 +167,7 @@ const PasswordResetPage: React.FC = () => {
             variant="contained"
             sx={{
               backgroundColor: '#6D4C41', // Brown background
-              color: '#fff', // White text
+              color: '#fff', 
               '&:hover': {
                 backgroundColor: '#5D4037', // Darker brown on hover
               },
