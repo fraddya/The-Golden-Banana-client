@@ -11,9 +11,26 @@ const NotFoundPage: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: 'rgba(255, 242, 117, 0.7)',
       }}
     >
+        <Box
+        sx={{
+          position: 'absolute',
+          right: '10%',
+          bottom: '25%',
+          height: '80%',
+          width: '30%',
+          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1307593942866329681/bananaerror404-removebg-preview.png?ex=673adf41&is=67398dc1&hm=b36e7c8e33b3743fe9261bcbe159e0cfe64e1ec8104b16f1baa32af94180ff5f&) no-repeat left bottom',
+          backgroundSize: 'contain',
+          animation: 'moveUpDown 2s infinite alternate',
+          '@keyframes moveUpDown': {
+            '0%': { transform: 'translateY(0)' },
+            '100%': { transform: 'translateY(-20px)' },
+          },
+        }}
+      />
+      
       <Typography variant="h3" sx={{ color: '#6D4C41', marginBottom: '20px' }}>
         404 - Page Not Found
       </Typography>
