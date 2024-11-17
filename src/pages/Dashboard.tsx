@@ -100,6 +100,10 @@ const Dashboard: React.FC = () => {
   };
   const handleScoreboardClick = () => navigate('/leaderboard');
 
+  const handleUpdateProfileClick = () => {
+    navigate('/profile');
+  };
+
   if (showWelcome) {
     return <WelcomeScreen onContinue={() => setShowWelcome(false)} />;
   }
@@ -149,7 +153,7 @@ const Dashboard: React.FC = () => {
       </Box>
 
       <Button
-      //onClick={() => handleHomeClick()}
+      onClick={() => handleUpdateProfileClick()}
         sx={{
           position: 'absolute',
           right: '1%',

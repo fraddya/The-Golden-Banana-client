@@ -250,7 +250,7 @@ const LevelPage: React.FC = () => {
           width: '14%',
           background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1307357277547659347/woden_home_button.png?ex=673a02d8&is=6738b158&hm=71c073c0de02f565b923895dd4173d104ea247f3cc018bce2cb297c8e8a63471&) no-repeat left bottom',
           backgroundSize: 'contain',
-          animation: 'moveUpDown 2s infinite alternate',
+          // animation: 'moveUpDown 2s infinite alternate',
           // '@keyframes moveUpDown': {
           //   '0%': { transform: 'translateY(0)' },
           //   '100%': { transform: 'translateY(-12px)' },

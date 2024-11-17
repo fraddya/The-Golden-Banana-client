@@ -5,7 +5,7 @@ const getToken = () => sessionStorage.getItem('token');
 const handleUnauthorizedAccess = (status: number) => {
   if (status === 403) {
     sessionStorage.clear();
-    window.location.href = '/'; // Adjust this to the path of your login page
+    window.location.href = '/';
   }
 };
 

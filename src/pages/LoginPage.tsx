@@ -22,6 +22,7 @@ const LoginPage: React.FC = () => {
         navigate('/password-reset');
       } else if (user.role === 'USER') {
         sessionStorage.setItem('userRole', user.role);
+        sessionStorage.setItem('userId', user.id.toString());
         sessionStorage.setItem('userName', user.firstName);
         navigate('/dashboard');
       } else {
