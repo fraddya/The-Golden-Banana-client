@@ -20,6 +20,10 @@ const UpdateProfilePage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const handleHomeClick = () => {
+    navigate('/dashboard');
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       setLoading(true);
@@ -70,8 +74,8 @@ const UpdateProfilePage: React.FC = () => {
         email,
       };
 
-      await updateUser(parseInt(userId), updatedUser);
-      navigate('/profile'); // Navigate to the profile view or another relevant page
+      await updateUser(Number(userId), updatedUser);
+      navigate('/dashboard'); // Navigate to the profile view or another relevant page
     } catch (err: Error | any) {
       setError(err.message);
     } finally {
@@ -97,7 +101,7 @@ const UpdateProfilePage: React.FC = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
           zIndex: 1,
         },
         zIndex: 2,
@@ -112,11 +116,31 @@ const UpdateProfilePage: React.FC = () => {
           width: '30%',
           background: 'url(./images/banana_man.png) no-repeat left bottom',
           backgroundSize: 'contain',
+          zIndex: 2,
           animation: 'moveUpDown 2s infinite alternate',
           '@keyframes moveUpDown': {
             '0%': { transform: 'translateY(0)' },
             '100%': { transform: 'translateY(-20px)' },
           },
+        }}
+      />
+
+      <Button
+      onClick={() => handleHomeClick()}
+        sx={{
+          position: 'absolute',
+          right: '1%',
+          bottom: '84%',
+          height: '14%',
+          width: '14%',
+          background: 'url(./images/button/woden_home_button.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          zIndex: 2,
+          //animation: 'moveUpDown 2s infinite alternate',
+          // '@keyframes moveUpDown': {
+          //   '0%': { transform: 'translateY(0)' },
+          //   '100%': { transform: 'translateY(-12px)' },
+          // },
         }}
       />
 
