@@ -137,6 +137,7 @@ const Dashboard: React.FC = () => {
           sx={{
             color: '#6D4C41',
             fontFamily: 'Comic Sans MS',
+            fontWeight: 'bold',
           }}
         >
           Hello
@@ -146,6 +147,7 @@ const Dashboard: React.FC = () => {
           sx={{
             color: '#6D4C41',
             fontFamily: 'Comic Sans MS',
+            fontWeight: 'bold',
           }}
         >
           {playerName} !
