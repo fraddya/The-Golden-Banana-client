@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box, Paper } from '@mui/material';
 import { useNavigate, Link  } from 'react-router-dom';
-import { loginUser } from '../services/userService';  // Import the loginUser function from your service
+import { loginUser } from '../services/userService'; 
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -19,9 +19,10 @@ const LoginPage: React.FC = () => {
       const user = await loginUser(email, password);
       // console.log('Logged in user:', user);
       if (user.firstTimeLogin) {
-        navigate('/password-reset'); // Redirect to password reset page
+        navigate('/password-reset');
       } else if (user.role === 'USER') {
         sessionStorage.setItem('userRole', user.role);
+        sessionStorage.setItem('userId', user.id.toString());
         sessionStorage.setItem('userName', user.firstName);
         navigate('/dashboard');
       } else {
@@ -53,7 +54,7 @@ const LoginPage: React.FC = () => {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.1)', // Adjust the opacity for darkness
+            backgroundColor: 'rgba(0, 0, 0, 0.1)', 
             zIndex: 1,
          },
             zIndex: 2, // Ensure the content is above the overlay
@@ -113,11 +114,11 @@ const LoginPage: React.FC = () => {
                 input: { color: '#FFF' },
                 '& .MuiOutlinedInput-root': {
                   '&.Mui-focused fieldset': {
-                    borderColor: '#8D6E63', // border color when focused
+                    borderColor: '#8D6E63',
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000', // label color when focused
+                    color: '#000',
                 },
               }}
               variant="outlined"
@@ -134,11 +135,11 @@ const LoginPage: React.FC = () => {
                 input: { color: '#FFF' },
                 '& .MuiOutlinedInput-root': {
                   '&.Mui-focused fieldset': {
-                    borderColor: '#8D6E63', // border color when focused
+                    borderColor: '#8D6E63', 
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000', // label color when focused
+                    color: '#000',
                 },
               }}
               variant="outlined"

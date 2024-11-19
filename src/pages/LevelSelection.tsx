@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import WebFont from 'webfontloader';
 import { Box, Typography, Button, Grid, CircularProgress } from '@mui/material';
-import { fetchLevelSuggestions, Level } from '../services/levelService'; // Assuming your service layer is in api.ts
+import { fetchLevelSuggestions, Level } from '../services/levelService';
 import { useNavigate } from 'react-router-dom';
 
 const LevelSelection: React.FC = () => {

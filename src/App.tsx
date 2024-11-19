@@ -7,6 +7,8 @@ import LevelPage from './pages/LevelPage';
 import LeaderBoard from './pages/LeaderBoard';
 import RegisterPage from './pages/RegisterPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import UpdateProfilePage from './pages/UpdateProfilePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const App: React.FC = () => {
 
@@ -20,10 +22,12 @@ const App: React.FC = () => {
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/password-reset" element={<PasswordResetPage />} />
+        <Route path="/profile" element={<UpdateProfilePage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/play" element={<LevelSelection />} />
         <Route path="/level/:id" element={<LevelPage />} />
         <Route path="/leaderboard" element={<LeaderBoard />} />
+        <Route path="*" element={<NotFoundPage />} /> {/* Fallback route */}
       </Routes>
     </Router>
   );

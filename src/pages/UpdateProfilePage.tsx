@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Container, Typography, Box, Paper, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from '../services/userService';
+import { fetchUserById, updateUser } from '../services/userService';
 
 // Enum to represent GenderType options
 enum GenderType {
@@ -10,33 +10,72 @@ enum GenderType {
   OTHER = 'OTHER',
 }
 
-const RegisterPage: React.FC = () => {
+const UpdateProfilePage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [contactNo, setContactNo] = useState('');
   const [genderType, setGenderType] = useState<GenderType | ''>('');
-  //const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    navigate('/dashboard');
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      setLoading(true);
+      setError(null);
+
+      const userId = sessionStorage.getItem('userId');
+      if (!userId) {
+        setError('User not logged in');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const user = await fetchUserById(parseInt(userId));
+        setFirstName(user.firstName);
+        setLastName(user.lastName);
+        setContactNo(user.contactNo);
+        setGenderType(user.genderType as GenderType);
+        setEmail(user.email);
+      } catch (err: Error | any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
 
+    const userId = sessionStorage.getItem('userId');
+    if (!userId) {
+      setError('User not logged in');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const newUser = {
+      const updatedUser = {
         firstName,
         lastName,
         contactNo,
         genderType,
         email,
-        //passWord: password,
       };
-      await createUser(newUser);
-      navigate('/');
+
+      await updateUser(Number(userId), updatedUser);
+      navigate('/dashboard'); // Navigate to the profile view or another relevant page
     } catch (err: Error | any) {
       setError(err.message);
     } finally {
@@ -62,13 +101,12 @@ const RegisterPage: React.FC = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
           zIndex: 1,
         },
         zIndex: 2,
       }}
     >
-
       <Box
         sx={{
           position: 'absolute',
@@ -78,11 +116,31 @@ const RegisterPage: React.FC = () => {
           width: '30%',
           background: 'url(./images/banana_man.png) no-repeat left bottom',
           backgroundSize: 'contain',
+          zIndex: 2,
           animation: 'moveUpDown 2s infinite alternate',
           '@keyframes moveUpDown': {
             '0%': { transform: 'translateY(0)' },
             '100%': { transform: 'translateY(-20px)' },
           },
+        }}
+      />
+
+      <Button
+      onClick={() => handleHomeClick()}
+        sx={{
+          position: 'absolute',
+          right: '1%',
+          bottom: '84%',
+          height: '14%',
+          width: '14%',
+          background: 'url(./images/button/woden_home_button.png) no-repeat left bottom',
+          backgroundSize: 'contain',
+          zIndex: 2,
+          //animation: 'moveUpDown 2s infinite alternate',
+          // '@keyframes moveUpDown': {
+          //   '0%': { transform: 'translateY(0)' },
+          //   '100%': { transform: 'translateY(-12px)' },
+          // },
         }}
       />
 
@@ -99,7 +157,7 @@ const RegisterPage: React.FC = () => {
           }}
         >
           <Typography variant="h3" gutterBottom align="center" sx={{ marginBottom: '10px', color: '#6D4C41', fontWeight: 'bold' }}>
-            Register
+            Update Profile
           </Typography>
           <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
@@ -117,7 +175,7 @@ const RegisterPage: React.FC = () => {
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000',
+                  color: '#000',
                 },
               }}
               variant="outlined"
@@ -137,7 +195,7 @@ const RegisterPage: React.FC = () => {
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000',
+                  color: '#000',
                 },
               }}
               variant="outlined"
@@ -157,7 +215,7 @@ const RegisterPage: React.FC = () => {
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000',
+                  color: '#000',
                 },
               }}
               variant="outlined"
@@ -178,7 +236,7 @@ const RegisterPage: React.FC = () => {
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000',
+                  color: '#000',
                 },
               }}
               variant="outlined"
@@ -203,7 +261,7 @@ const RegisterPage: React.FC = () => {
                   },
                 },
                 '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#000',
+                  color: '#000',
                 },
               }}
               variant="outlined"
@@ -217,7 +275,7 @@ const RegisterPage: React.FC = () => {
               disabled={loading}
               sx={{ padding: '10px 0', backgroundColor: '#6D4C41' }}
             >
-              {loading ? 'Creating account...' : 'Register'}
+              {loading ? 'Updating...' : 'Update Profile'}
             </Button>
           </Box>
         </Paper>
@@ -226,4 +284,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage;
+export default UpdateProfilePage;
