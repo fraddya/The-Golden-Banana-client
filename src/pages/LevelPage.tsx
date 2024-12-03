@@ -365,7 +365,7 @@ const LevelPage: React.FC = () => {
           onClose={() => setOpenDialog(false)}
           PaperProps={{
             style: {
-              backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668324558704691/wood.webp?ex=672fe2fd&is=672e917d&hm=f6651262b56b845ef546936cd020e72ec4877427e3cc7476437b91433ffc5388&)`,
+              backgroundImage: `url(./images/button/normal_button.png)`,
               backgroundSize: 'cover',
               backgroundColor: '#FFEB3B',
               padding: '20px',

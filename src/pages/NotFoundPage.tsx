@@ -21,7 +21,7 @@ const NotFoundPage: React.FC = () => {
           bottom: '25%',
           height: '80%',
           width: '30%',
-          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1307593942866329681/bananaerror404-removebg-preview.png?ex=673adf41&is=67398dc1&hm=b36e7c8e33b3743fe9261bcbe159e0cfe64e1ec8104b16f1baa32af94180ff5f&) no-repeat left bottom',
+          background: 'url(./images/banana_notfound.png) no-repeat left bottom',
           backgroundSize: 'contain',
           animation: 'moveUpDown 2s infinite alternate',
           '@keyframes moveUpDown': {
