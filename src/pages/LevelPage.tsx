@@ -282,7 +282,7 @@ const LevelPage: React.FC = () => {
             marginBottom: '20px',
             zIndex: 1,
             fontSize: timeLeft <= 5 ? '2.5rem' : '2rem',
-            color: timeLeft <= 5 ? '#FF0000' : 'black',
+            color: timeLeft <= 5 ? '#FF0000' : 'white',
             animation: timeLeft <= 5 ? 'pulse 0.5s infinite' : 'none',
             '@keyframes pulse': {
               '0%': { transform: 'scale(1)' },
@@ -375,7 +375,9 @@ const LevelPage: React.FC = () => {
             },
           }}
         >
-          <DialogTitle sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold' }}>{dialogMessage}</DialogTitle>
+          <DialogTitle sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold',
+            color:dialogMessage === 'Time is Up!!' || dialogMessage === 'Oops! Wrong answer.' || dialogMessage === 'Congrats! You finished the level.'? 'white' : 'black',
+           }}>{dialogMessage}</DialogTitle>
           <DialogContent>
             <DialogContentText sx={{ fontFamily: 'DynaPuff, sans-serif', fontWeight: 'bold', color: 'white' }}>
               {dialogMessage === 'Congrats! You finished the level.'
