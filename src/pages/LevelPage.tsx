@@ -235,7 +235,7 @@ const LevelPage: React.FC = () => {
           //maxWidth: '1200px',
           //width: '900px',
           height: '70%',
-          backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668324558704691/wood.webp?ex=672fe2fd&is=672e917d&hm=f6651262b56b845ef546936cd020e72ec4877427e3cc7476437b91433ffc5388&)`,
+          backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668324558704691/wood.webp?ex=674f86fd&is=674e357d&hm=e646220ab5c6ffcd5060d55df3852cc5f31d5a6b8cc8fb745e8614f9638490b5&)`,
           border: '10px solid #6D4C41',
         }}
       >
@@ -248,7 +248,7 @@ const LevelPage: React.FC = () => {
           bottom: '84%',
           height: '14%',
           width: '14%',
-          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1307357277547659347/woden_home_button.png?ex=673a02d8&is=6738b158&hm=71c073c0de02f565b923895dd4173d104ea247f3cc018bce2cb297c8e8a63471&) no-repeat left bottom',
+          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1307357277547659347/woden_home_button.png?ex=674fc398&is=674e7218&hm=1d468c91cd82b828a78b7b0f03aefc501ea560c1dbb5c17ff2f507eefadc0924&) no-repeat left bottom',
           backgroundSize: 'contain',
           // animation: 'moveUpDown 2s infinite alternate',
           // '@keyframes moveUpDown': {
@@ -266,7 +266,7 @@ const LevelPage: React.FC = () => {
           bottom: '84%',
           height: '14%',
           width: '14%',
-          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1303667886748860416/wood_reload_button.png?ex=672c96d5&is=672b4555&hm=606c1fcbfc195dfe4e32915203b5d5558a6ae3412babb7b7449913e603c7f5ba&) no-repeat left bottom',
+          background: 'url(https://cdn.discordapp.com/attachments/752791123155615775/1303667886748860416/wood_reload_button.png?ex=674f8695&is=674e3515&hm=db442fbf67a6ac313c1d745012f2a6009a253490c8588cb7f9b072deb7ddbcac&) no-repeat left bottom',
           backgroundSize: 'contain',
           // animation: 'moveUpDown 2s infinite alternate',
           // '@keyframes moveUpDown': {
@@ -348,7 +348,7 @@ const LevelPage: React.FC = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668435741573200/normal_button.png?ex=672c9758&is=672b45d8&hm=32271ada9059f41954602fdbb5c914f0ac9fdfe6fc60751a9a21ce4d0281efa0&)`,
+              backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1303668435741573200/normal_button.png?ex=674f8718&is=674e3598&hm=03e613d368553b409c3124a269dc6d06406e0cecbae591f719f33ad1e9c4d72c&)`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               }}
@@ -365,7 +365,7 @@ const LevelPage: React.FC = () => {
           onClose={() => setOpenDialog(false)}
           PaperProps={{
             style: {
-              backgroundImage: `url(./images/button/normal_button.png)`,
+              backgroundImage: `url(https://cdn.discordapp.com/attachments/752791123155615775/1307344272135028766/wood1.jpeg?ex=674fb77b&is=674e65fb&hm=4a19ab3ac9da2fe9f302f511569bea5272858f054275370eb86f62b93fa727fe&)`,
               backgroundSize: 'cover',
               backgroundColor: '#FFEB3B',
               padding: '20px',
@@ -404,8 +404,8 @@ const LevelPage: React.FC = () => {
                 <Button
                   onClick={handleRetry}
                   sx={{
-                    backgroundColor: '#8D6E63',
-                    color: 'white',
+                    backgroundColor: 'yellow',
+                    color: 'black',
                     fontFamily: 'DynaPuff, sans-serif',
                     fontWeight: 'bold',
                     '&:hover': { backgroundColor: '#7B5B42' },
@@ -416,8 +416,8 @@ const LevelPage: React.FC = () => {
                 <Button
                   onClick={handleMainMenu}
                   sx={{
-                    backgroundColor: '#8D6E63',
-                    color: 'white',
+                    backgroundColor: 'yellow',
+                    color: 'black',
                     fontFamily: 'DynaPuff, sans-serif',
                     fontWeight: 'bold',
                     '&:hover': { backgroundColor: '#7B5B42' },
