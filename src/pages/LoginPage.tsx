@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box, Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../services/userService';  // Import the loginUser function from your service
+import { useNavigate, Link  } from 'react-router-dom';
+import { loginUser } from '../services/userService'; 
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -18,13 +18,16 @@ const LoginPage: React.FC = () => {
     try {
       const user = await loginUser(email, password);
       // console.log('Logged in user:', user);
-      if (user.role === 'ADMIN') {
-        localStorage.setItem('userRole', user.role);
-        localStorage.setItem('userName', user.firstName);
+      if (user.firstTimeLogin) {
+        navigate('/password-reset');
+      } else if (user.role === 'USER') {
+        sessionStorage.setItem('userRole', user.role);
+        sessionStorage.setItem('userId', user.id.toString());
+        sessionStorage.setItem('userName', user.firstName);
         navigate('/dashboard');
+      } else {
+        setError("User Not Authorized");
       }
-      // navigate('/dashboard');
-      setError("User Not Authorized");
     } catch (err: Error | any) {
       setError(err.message);
     } finally {
@@ -41,24 +44,36 @@ const LoginPage: React.FC = () => {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(45deg, #e68600, #d6982d, #d1ad1d, #f5bc02)',
-        backgroundSize: '400% 400%',
-        animation: 'gradient 15s ease infinite',
-        '@keyframes gradient': {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
+        backgroundImage: `url(./images/background.png)`,
+        backgroundPosition: 'center',
+        backgroundSize: '100% 100%',
+        '::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.1)', 
+            zIndex: 1,
+         },
+            zIndex: 2, // Ensure the content is above the overlay
+        // animation: 'gradient 15s ease infinite',
+        // '@keyframes gradient': {
+        //   '0%': { backgroundPosition: '0% 50%' },
+        //   '50%': { backgroundPosition: '100% 50%' },
+        //   '100%': { backgroundPosition: '0% 50%' },
+        // },
       }}
     >
       <Box
         sx={{
           position: 'absolute',
-          left: '15%',
-          bottom: '20%',
-          height: '60%',
-          width: '20%',
-          background: 'url(./images/mechanic_man.png) no-repeat left bottom',
+          right: '10%',
+          bottom: '25%',
+          height: '80%',
+          width: '30%',
+          background: 'url(./images/banana_man.png) no-repeat left bottom',
           backgroundSize: 'contain',
           animation: 'moveUpDown 2s infinite alternate',
           '@keyframes moveUpDown': {
@@ -67,54 +82,7 @@ const LoginPage: React.FC = () => {
           },
         }}
       />
-      <Box
-        sx={{
-          position: 'absolute',
-          right: '15%',
-          top: '05%',
-          height: '40%',
-          width: '40%',
-          background: 'url(./images/gear.png) no-repeat center center',
-          backgroundSize: 'contain',
-          animation: 'rotateGear 5s linear infinite',
-          '@keyframes rotateGear': {
-            '0%': { transform: 'rotate(0deg)' },
-            '100%': { transform: 'rotate(360deg)' },
-          },
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          right: '16%',
-          bottom: '10%',
-          height: '20%',
-          width: '20%',
-          background: 'url(./images/gear2.png) no-repeat center center',
-          backgroundSize: 'contain',
-          animation: 'rotateGear 5s linear infinite',
-          '@keyframes rotateGear': {
-            '0%': { transform: 'rotate(0deg)' },
-            '100%': { transform: 'rotate(360deg)' },
-          },
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          left: '35%',
-          bottom: '06%',
-          height: '25%',
-          width: '25%',
-          background: 'url(./images/spanner.png) no-repeat center center',
-          backgroundSize: 'contain',
-          animation: 'moveLeftRight 3s infinite alternate',
-          '@keyframes moveLeftRight': {
-            '0%': { transform: 'translateX(0)' },
-            '100%': { transform: 'translateX(-20px)' },
-          },
-        }}
-      />
+      
       <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1 }}>
         <Paper
           elevation={3}
@@ -127,7 +95,7 @@ const LoginPage: React.FC = () => {
             border: '1px solid rgba(255, 255, 255, 0.3)',
           }}
         >
-          <Typography variant="h3" gutterBottom align="center" sx={{ marginBottom: '10px', color: '#FF5722', fontWeight: 'bold' }}>
+          <Typography variant="h3" gutterBottom align="center" sx={{ marginBottom: '10px', color: '#6D4C41', fontWeight: 'bold' }}>
             Login
           </Typography>
           <Box display="flex" justifyContent="center" mb={3}>
@@ -141,7 +109,18 @@ const LoginPage: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              sx={{ marginBottom: '20px', input: { color: '#FFF' } }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63',
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             />
             <TextField
@@ -151,7 +130,18 @@ const LoginPage: React.FC = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              sx={{ marginBottom: '20px', input: { color: '#FFF' } }}
+              sx={{
+                marginBottom: '20px',
+                input: { color: '#FFF' },
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8D6E63', 
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                    color: '#000',
+                },
+              }}
               variant="outlined"
             />
             {error && <Typography color="error" align="center" sx={{ marginBottom: '20px' }}>{error}</Typography>}
@@ -161,10 +151,30 @@ const LoginPage: React.FC = () => {
               color="primary"
               fullWidth
               disabled={loading}
-              sx={{ padding: '10px 0', backgroundColor: '#FF5722' }}
+              sx={{ padding: '10px 0', backgroundColor: '#6D4C41' }}
             >
               {loading ? 'Logging in...' : 'Login'}
             </Button>
+            <Typography
+              variant="body2"
+              align="center"
+              sx={{ marginTop: '20px', color: '#000' }}
+            >
+              Don't have an account?{' '}
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: 'none',
+                  color: '#000',
+                  fontWeight: 'bold',
+                  position: 'relative',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
+                onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+              >
+                Create one
+              </Link>
+            </Typography>
           </Box>
         </Paper>
       </Container>

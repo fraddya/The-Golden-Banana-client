@@ -1,4 +1,18 @@
 const apiUrl = process.env.REACT_APP_API_URL;
+const getToken = () => sessionStorage.getItem('token');
+
+// Helper function to handle 403 errors and redirect to login
+const handleUnauthorizedAccess = (status: number) => {
+  if (status === 403) {
+    sessionStorage.clear();
+    window.location.href = '/';
+  }
+};
+
+// Session check
+export const isAuthenticated = (): boolean => {
+  return !!sessionStorage.getItem('token');
+};
 
 export interface Vehicle {
   vehicleNo: string;
@@ -27,6 +41,7 @@ export interface User {
   role: string;
   email: string;
   passWord: string;
+  firstTimeLogin: boolean;
   vehicle: Vehicle[];
 }
 
@@ -34,9 +49,13 @@ export interface User {
 export const fetchEmployees = async (): Promise<User[]> => {
   const response = await fetch(`${apiUrl}/users?role=EMPLOYEE`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to fetch employees');
   }
 
@@ -47,10 +66,14 @@ export const fetchEmployees = async (): Promise<User[]> => {
 export const fetchUsers = async (): Promise<User[]> => {
   const response = await fetch(`${apiUrl}/users?role=USER`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
-    throw new Error('Failed to fetch employees');
+    handleUnauthorizedAccess(response.status);
+    throw new Error('Failed to fetch users');
   }
 
   const data = await response.json();
@@ -61,9 +84,13 @@ export const fetchUsers = async (): Promise<User[]> => {
 export const fetchUserById = async (id: number): Promise<User> => {
   const response = await fetch(`${apiUrl}/users/${id}`, {
     method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${getToken()}`,
+    },
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to fetch user with ID ${id}`);
   }
 
@@ -77,11 +104,13 @@ export const createUser = async (newUser: Partial<User>): Promise<User> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      //'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(newUser),
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error('Failed to create user');
   }
 
@@ -95,11 +124,13 @@ export const updateUser = async (id: number, updatedUser: Partial<User>): Promis
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getToken()}`,
     },
     body: JSON.stringify(updatedUser),
   });
 
   if (!response.ok) {
+    handleUnauthorizedAccess(response.status);
     throw new Error(`Failed to update user with ID ${id}`);
   }
 
@@ -122,8 +153,15 @@ export const loginUser = async (email: string, passWord: string): Promise<User> 
     throw new Error(errorResponse.validationFailures[0].message);
   } else if (response.status === 500) {
     throw new Error('Server Error');
+  } else if (response.status === 403) {
+    handleUnauthorizedAccess(response.status);
   }
 
   const data = await response.json();
+
+  // Store token in session storage
+  sessionStorage.setItem('token', data.content.token);
+  sessionStorage.setItem('userId', data.content.id);
+
   return data.content;
 };
